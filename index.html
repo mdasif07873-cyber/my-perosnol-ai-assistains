@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nova AI Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-wrap">
+          <div class="brand-badge">N</div>
+          <div>
+            <div class="eyebrow">AI COMPUTER ASSISTANT</div>
+            <h1>NOVA</h1>
+          </div>
+        </div>
+
+        <div class="orb-panel">
+          <div class="orb">
+            <div class="orb-core"></div>
+          </div>
+        </div>
+
+        <div class="nav-list">
+          <button class="nav-item active">Overview</button>
+          <button class="nav-item">Voice</button>
+          <button class="nav-item">Tasks</button>
+          <button class="nav-item">Security</button>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div>
+            <div class="eyebrow muted">SYSTEM STATUS</div>
+            <h2>Assistant online</h2>
+          </div>
+          <div class="status-pill online">● Live</div>
+        </header>
+
+        <section class="hero-grid">
+          <div class="card large-card">
+            <div class="row-between">
+              <div>
+                <div class="label">Microphone</div>
+                <div id="micStatus" class="value online-text">● Listening</div>
+              </div>
+              <div class="mini-toggle">
+                <span class="toggle-dot"></span>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="row-between stat-row">
+              <div>
+                <div class="label">Status</div>
+                <div id="assistantStatus" class="value">Ready</div>
+              </div>
+              <button id="speakBtn" class="primary-btn">Speak</button>
+            </div>
+
+            <div class="row-between stat-row">
+              <div>
+                <div class="label">Current task</div>
+                <div id="currentTask" class="value">None</div>
+              </div>
+              <button id="stopBtn" class="secondary-btn">Stop</button>
+            </div>
+
+            <div class="command-box">
+              <div class="label">Latest command</div>
+              <div id="commandText" class="command-text">"Hey Nova, open Chrome and search Bihar Polytechnic syllabus."</div>
+            </div>
+
+            <div class="input-panel">
+              <input id="commandInput" type="text" value="Hey Nova, open Chrome" placeholder="Type a command..." />
+              <button id="runCommandBtn" class="primary-btn small-btn">Run</button>
+            </div>
+          </div>
+
+          <div class="card metrics-card">
+            <div class="label">System</div>
+            <div class="metric-group">
+              <div class="metric">
+                <span>CPU</span>
+                <strong id="cpuValue">24%</strong>
+              </div>
+              <div class="bar"><i id="cpuBar" style="width: 24%"></i></div>
+            </div>
+
+            <div class="metric-group">
+              <div class="metric">
+                <span>RAM</span>
+                <strong id="ramValue">48%</strong>
+              </div>
+              <div class="bar"><i id="ramBar" style="width: 48%"></i></div>
+            </div>
+
+            <div class="metric-group">
+              <div class="metric">
+                <span>Wake word</span>
+                <strong id="wakeWordState">Ready</strong>
+              </div>
+              <div class="tag-group">
+                <span class="tag">Hey Nova</span>
+                <span class="tag">Nova</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="task-panel card">
+          <div class="panel-header">
+            <div>
+              <div class="label">TASK</div>
+              <h3 id="taskTitle">Send WhatsApp message to Asif</h3>
+            </div>
+            <span class="task-state">Awaiting confirmation</span>
+          </div>
+
+          <div class="task-grid">
+            <div>
+              <div class="task-label">Current step</div>
+              <div id="currentStep" class="task-value">Searching WhatsApp</div>
+            </div>
+            <div>
+              <div class="task-label">Next step</div>
+              <div class="task-value">Open Asif conversation</div>
+            </div>
+            <div>
+              <div class="task-label">Status</div>
+              <div class="task-value accent">Waiting for confirmation</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="bottom-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4>Quick actions</h4>
+            </div>
+            <div class="button-row">
+              <button class="action-btn">History</button>
+              <button id="contactsButton" class="action-btn">Contacts</button>
+              <button class="action-btn">Settings</button>
+              <button class="action-btn">Files</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h4>Recent tasks</h4>
+            </div>
+            <ul class="history-list">
+              <li><span>Open Chrome</span><time>Today</time></li>
+              <li><span>Search Bihar Polytechnic</span><time>Today</time></li>
+              <li><span>Open WhatsApp</span><time>Yesterday</time></li>
+            </ul>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="contactsDialog" class="contacts-dialog" aria-labelledby="contactsTitle">
+      <div class="contacts-header">
+        <div>
+          <div class="label">LOCAL ALLOWLIST</div>
+          <h2 id="contactsTitle">Allowed contacts</h2>
+        </div>
+        <button id="closeContacts" class="secondary-btn" type="button">Close</button>
+      </div>
+      <form id="contactForm" class="contact-form">
+        <label>
+          Contact name
+          <input id="contactName" name="name" autocomplete="name" maxlength="60" required />
+        </label>
+        <label>
+          Phone with country code
+          <input id="contactPhone" name="phone" type="tel" autocomplete="tel" placeholder="+country code and number" required />
+        </label>
+        <button class="primary-btn" type="submit">Allow contact</button>
+      </form>
+      <p id="contactsStatus" class="contacts-status" role="status"></p>
+      <ul id="contactsList" class="contacts-list" aria-label="Allowed contacts"></ul>
+      <p class="contacts-note">Stored in this browser only. Messages open as drafts for your review.</p>
+    </dialog>
+
+    <script src="app.js?v=intents-2"></script>
+  </body>
+</html>
